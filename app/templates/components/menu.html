@@ -1,0 +1,34 @@
+{% if request.user.is_authenticated %}
+<nav class="d-flex ">
+    <div class="menu-item me-3" style="padding-right: 20px;">
+        <a href="{% url 'todo:main' %}" class="menu-link">
+            <i class="fa-solid fa-list fa-lg" style="color: #ffffff;">Tasks</i>
+        </a>
+    </div>
+
+    <div class="menu-item me-3" style="padding-right: 20px;">
+        <a href="{% url 'todo:create' %}" class="menu-link">
+            <i class="fa-solid fa-basket-shopping fa-lg" style="color: #ffffff;">Add Task</i>
+        </a>
+    </div>
+
+    <div class="menu-item" style="padding-right: 20px;">
+        <a href="{% url 'logout' %}" class="menu-link">
+            <i class="fa-solid fa-right-from-bracket fa-lg" style="color: #ffffff;">Logout</i>
+        </a>
+    </div>
+
+{% else %}
+    <div class="menu-item justify-content-end" style="padding-right: 20px;">
+        <a href="{% url 'login' %}" class="menu-link">
+            <span class="menu-title fs-5 text-white">Login</span>
+        </a>
+    </div>
+
+    <div class="menu-item" style="padding-right: 20px;">
+        <a href="{% url 'signup' %}" class="menu-link">
+            <span class="menu-title fs-5 text-white">Sign Up</span>
+        </a>
+    </div>
+</nav>
+{% endif %}

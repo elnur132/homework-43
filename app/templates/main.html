@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    {% if todos %}
+        <div class="table-responsive">
+            <table class="table table-sm table-bordered">
+                <thead>
+                    <tr>
+                    <th class="text-center" scope="col">Task</th>
+                    <th class="text-center" scope="col">Content</th>
+                    <th class="text-center" scope="col">Category</th>
+                    <th class="text-center" scope="col">Action</th>
+                    <th class="text-center" scope="col">Edit</th>
+                    <th class="text-center" scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for todo in todos %}
+                    {% if todo.completed %}
+                        <tr class="table-secondary">
+                            <td class="striker text-center">{{ todo.title }}</td>
+                            <td class="striker text-center">{{ todo.content }}</td>
+                            <td class="striker text-center">{{ todo.category }}</td>
+                            <td class="text-center"><a class="btn btn-primary" href="{% url 'todo:not_done' todo.id %}">Not Done</a></td>
+                            <td class="text-center"><a class="btn btn-warning" href="{% url 'todo:edit' todo.id %}">Edit</a></td>
+                            <td class="text-center"><a class="btn btn-danger" href="{% url 'todo:delete' todo.id %}">Delete</a></td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td class="text-center">{{ todo.title }}</td>
+                            <td class="text-center">{{ todo.content }}</td>
+                            <td class="striker text-center">{{ todo.category }}</td>
+                            <td class="text-center"><a class="btn btn-primary" href="{% url 'todo:done' todo.id %}">Done</a></td>
+                            <td class="text-center"><a class="btn btn-warning" href="{% url 'todo:edit' todo.id %}">Edit</a></td>
+                            <td class="text-center"><a class="btn btn-danger" href="{% url 'todo:delete' todo.id %}">Delete</a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}
+
